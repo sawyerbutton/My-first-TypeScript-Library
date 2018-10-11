@@ -149,3 +149,65 @@ npm publish --access=public
 ```
 
 > remember to use `npm publish --access=public` command rather than `npm publush` if you don't have private package access in npm.
+
+## Just in case
+
+> Just in case of making a library available as a system command
+
+1. On top of executable files` (the main files) like dist/index.js`, add the following line which makes sure the system understands how to execute the compiled javascript file, by instructing it to interpret it with node
+
+```javascript
+#!/usr/bin/env node
+```
+
+2. modify the `package.json` file by adding `"bin":{"myTypeFunc": "dist/index.js"}`
+
+```json
+{
+  "name": "@sawyerbutton/my-first-typescript-library",
+  "version": "1.2.0",
+  "description": "log \"hello\" and \"bye\" to the console!",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+   "bin": {
+        "myTypeFunc": "dist/index.js"
+    },
+  "scripts": {
+    "test": "mocha --reporter spec --compilers ts:ts-node/register src/**/*.spec.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sawyerbutton/My-first-TypeScript-Library.git"
+  },
+  "keywords": [
+    "TypeScript"
+  ],
+  "author": "sawyerbutton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sawyerbutton/My-first-TypeScript-Library/issues"
+  },
+  "homepage": "https://github.com/sawyerbutton/My-first-TypeScript-Library#readme",
+  "devDependencies": {
+    "@types/chai": "^4.1.6",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.2"
+  }
+}
+```
+
+3. Once publish latest package, consumers will be able to install package globally on a machine using:
+
+```bash
+sudo npm install -g @sawyerbutton/my-first-typescript-library
+```
+
+> then using command in terminal
+
+```bash
+myTypeFunc
+```
+4. Yeah, current package is pretty useless.. but umm, it is just a small example to demonstrate how to do it
