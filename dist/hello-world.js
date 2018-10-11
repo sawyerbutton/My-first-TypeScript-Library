@@ -8,4 +8,8 @@ function sayBye() {
     console.log('bye');
 }
 exports.sayBye = sayBye;
+function add(x, y) {
+    return x + y;
+}
+exports.add = add;
 //# sourceMappingURL=hello-world.js.map

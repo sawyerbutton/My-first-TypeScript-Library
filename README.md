@@ -87,6 +87,60 @@ tsconfig.json
 src
 ```
 
+## test library
+
+> Install packages for unit testing
+
+```bash
+yarn add mocha @types/mocha chai @types/chai ts-node typescript --dev
+```
+
+> there is a unit
+
+```typescript
+export function add(x: number, y: number) {
+  return x + y;
+}
+```
+
+> corresponding unit test
+
+```typescript
+import { add } from './hello-world';
+
+import * as mocha from 'mocha';
+import * as chai from 'chai';
+
+const expect  = chai.expect;
+
+describe('My add function', () => {
+
+    it('should be able to add things correctly' , () => {
+        expect(add(3,4)).to.equal(7);
+    });
+
+});
+```
+
+> run the test command 
+
+```bash
+mocha --reporter spec --compilers ts:ts-node/register src/**/*.spec.ts
+```
+
+> console should output
+
+```bash
+ My add function
+    ✓ should be able to add things correctly
+
+
+  1 passing (7ms)
+```
+
+> It will be more convenient to put this long command into package.json into "scripts: { "test": "..."}" and then run the tests with `npm test`.
+
+
 ## compile file then publish
 
 ```bash
